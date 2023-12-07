@@ -58,7 +58,7 @@ class ActorCreate(CreateView):
 
 class ActorUpdate(UpdateView):
   model = Actor
-  fields = ['name', 'gender']
+  fields = ['name', 'nickname']
 
 class ActorDelete(DeleteView):
   model = Actor

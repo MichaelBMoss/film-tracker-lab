@@ -30,19 +30,19 @@
     </form>
     <br>
     {% if film.fed_for_today %}
-      <div class="card-panel teal-text center-align">{{film.name}} has been fed all meals for today</div>
+      <div class="card-panel teal-text center-align">{{film.name}} has been fed all locations for today</div>
     {% else %}
       <div class="card-panel red-text center-align">{{film.name}} might be hungry</div>
     {% endif %}
     <table class="striped">
       <thead>
-        <tr><th>Date</th><th>Meal</th></tr>
+        <tr><th>Date</th><th>Location</th></tr>
       </thead>
       <tbody>
         {% for director in film.director_set.all %}
           <tr>
             <td>{{director.date}}</td>
-            <td>{{director.get_meal_display}}</td>
+            <td>{{director.get_location_display}}</td>
           </tr>
         {% endfor %}
       </tbody>
@@ -58,7 +58,7 @@
         <div class="card">
           <div class="card-content">
             <span class="card-title">
-              A <span style="gender: {{ actor.gender }}">{{ actor.gender }}</span> {{ actor.name }}
+              A <span style="nickname: {{ actor.nickname }}">{{ actor.nickname }}</span> {{ actor.name }}
             </span>
           </div>
           <div class="card-action">
@@ -70,7 +70,7 @@
         </div>
       {% endfor %}
     {% else %}
-      <h5>No Actors 😿</h5>
+      <h5>No Actors</h5>
     {% endif %}
   </div>
   <div class="col s6">
@@ -80,7 +80,7 @@
         <div class="card">
           <div class="card-content">
             <span class="card-title">
-              A <span style="gender: {{ actor.gender }}">{{ actor.gender }}</span> {{ actor.name }}
+              A <span style="nickname: {{ actor.nickname }}">{{ actor.nickname }}</span> {{ actor.name }}
             </span>
           </div>
           <div class="card-action">
@@ -107,7 +107,7 @@
     autoClose: true
   });
 
-  const selectEl = document.getElementById('id_meal');
+  const selectEl = document.getElementById('id_location');
   M.FormSelect.init(selectEl);
 </script>
 {% endblock %}

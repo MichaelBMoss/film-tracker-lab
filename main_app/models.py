@@ -2,16 +2,20 @@ from django.db import models
 from django.urls import reverse
 from datetime import date
 
-MEALS = (
-  ('B', 'Breakfast'),
-  ('L', 'Lunch'),
-  ('D', 'Dinner'),
+LOCATIONS = (
+    ('N', 'New York City, NY'),
+    ('L', 'Los Angeles, CA'),
+    ('C', 'Chicago, IL'),
+    ('H', 'Houston, TX'),
+    ('P', 'Philadelphia, PA'),
+    ('S', 'San Diego, CA'),
+    ('D', 'Dallas, TX'),
 )
 
 
 class Actor(models.Model):
   name = models.CharField(max_length=50)
-  gender = models.CharField(max_length=20)
+  nickname = models.CharField(max_length=20)
 
   def __str__(self):
     return self.name
@@ -34,15 +38,15 @@ class Film(models.Model):
     return reverse('detail', kwargs={'film_id': self.id})
 
   def fed_for_today(self):
-    return self.director_set.filter(date=date.today()).count() >= len(MEALS)
+    return self.director_set.filter(date=date.today()).count() >= len(LOCATIONS)
 
 
 class Director(models.Model):
   date = models.DateField('Director Date')
-  meal = models.CharField(
+  location = models.CharField(
     max_length=1,
-    choices=MEALS,
-    default=MEALS[0][0]
+    choices=LOCATIONS,
+    default=LOCATIONS[0][0]
   )
 
   film = models.ForeignKey(
@@ -51,7 +55,7 @@ class Director(models.Model):
   )
 
   def __str__(self):
-    return f"{self.get_meal_display()} on {self.date}"
+    return f"{self.get_location_display()} on {self.date}"
 
   class Meta:
     ordering = ['-date']
