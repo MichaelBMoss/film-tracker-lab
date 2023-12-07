@@ -38,11 +38,18 @@ class Film(models.Model):
     return reverse('detail', kwargs={'film_id': self.id})
 
   def fed_for_today(self):
-    return self.director_set.filter(date=date.today()).count() >= len(LOCATIONS)
+    return self.screening_set.filter(date=date.today()).count() >= len(LOCATIONS)
+  
+  def most_recent_screening(self):
+    recent_screening = self.screening_set.order_by('-date').first()
+    if recent_screening:
+        return {'date': recent_screening.date, 'location': recent_screening.get_location_display()}
+    else:
+        return {'date': None, 'location': None}
 
 
-class Director(models.Model):
-  date = models.DateField('Director Date')
+class Screening(models.Model):
+  date = models.DateField('Screening Date')
   location = models.CharField(
     max_length=1,
     choices=LOCATIONS,

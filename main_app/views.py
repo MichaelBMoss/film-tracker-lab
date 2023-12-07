@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.views.generic import ListView, DetailView
 from .models import Film, Actor
-from .forms import DirectorForm
+from .forms import ScreeningForm
 
 def home(request):
   return render(request, 'home.html')
@@ -20,9 +20,9 @@ def films_detail(request, film_id):
   film = Film.objects.get(id=film_id)
   id_list = film.actors.all().values_list('id')
   actors_film_doesnt_have = Actor.objects.exclude(id__in=id_list)
-  director_form = DirectorForm()
+  screening_form = ScreeningForm()
   return render(request, 'films/detail.html', {
-    'film': film, 'director_form': director_form,
+    'film': film, 'screening_form': screening_form,
     'actors': actors_film_doesnt_have
   })
 
@@ -38,12 +38,12 @@ class FilmDelete(DeleteView):
   model = Film
   success_url = '/films'
 
-def add_director(request, film_id):
-  form = DirectorForm(request.POST)
+def add_screening(request, film_id):
+  form = ScreeningForm(request.POST)
   if form.is_valid():
-    new_director = form.save(commit=False)
-    new_director.film_id = film_id
-    new_director.save()
+    new_screening = form.save(commit=False)
+    new_screening.film_id = film_id
+    new_screening.save()
   return redirect('detail', film_id=film_id)
 
 class ActorList(ListView):

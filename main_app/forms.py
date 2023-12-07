@@ -1,8 +1,8 @@
 from django.forms import ModelForm
-from .models import Director
+from .models import Screening
 
-class DirectorForm(ModelForm):
+class ScreeningForm(ModelForm):
   class Meta:
-    model = Director
+    model = Screening
     fields = ['date', 'location']
 
