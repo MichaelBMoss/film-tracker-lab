@@ -1,8 +1,8 @@
 from django.forms import ModelForm
-from .models import Feeding
+from .models import Director
 
-class FeedingForm(ModelForm):
+class DirectorForm(ModelForm):
   class Meta:
-    model = Feeding
+    model = Director
     fields = ['date', 'meal']
 

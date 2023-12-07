@@ -10,7 +10,7 @@ MEALS = (
 
 
 # Create your models here.
-class Toy(models.Model):
+class Actor(models.Model):
   name = models.CharField(max_length=50)
   color = models.CharField(max_length=20)
 
@@ -18,17 +18,17 @@ class Toy(models.Model):
     return self.name
 
   def get_absolute_url(self):
-    return reverse('toys_detail', kwargs={'pk': self.id})
+    return reverse('actors_detail', kwargs={'pk': self.id})
 
 
-class Cat(models.Model):
+class Film(models.Model):
   name = models.CharField(max_length=100)
   breed = models.CharField(max_length=100)
   description = models.TextField(max_length=250)
   age = models.IntegerField()
-  # Create a M:M relationship with Toy
-  # toys is the Related Manager
-  toys = models.ManyToManyField(Toy)
+  # Create a M:M relationship with Actor
+  # actors is the Related Manager
+  actors = models.ManyToManyField(Actor)
 
   # Changing this instance method
   # does not impact the database, therefore
@@ -37,22 +37,22 @@ class Cat(models.Model):
     return f'{self.name} ({self.id})'
 
   def get_absolute_url(self):
-    return reverse('detail', kwargs={'cat_id': self.id})
+    return reverse('detail', kwargs={'film_id': self.id})
 
   def fed_for_today(self):
-    return self.feeding_set.filter(date=date.today()).count() >= len(MEALS)
+    return self.director_set.filter(date=date.today()).count() >= len(MEALS)
 
 
-class Feeding(models.Model):
-  date = models.DateField('Feeding Date')
+class Director(models.Model):
+  date = models.DateField('Director Date')
   meal = models.CharField(
     max_length=1,
     choices=MEALS,
     default=MEALS[0][0]
   )
-  # Create a cat_id FK
-  cat = models.ForeignKey(
-    Cat,
+  # Create a film_id FK
+  film = models.ForeignKey(
+    Film,
     on_delete=models.CASCADE
   )
 

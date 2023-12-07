@@ -1,18 +1,18 @@
 {% extends 'base.html' %}
 {% block content %}
 
-<h1>Toy Details</h1>
+<h1>Actor Details</h1>
 
 <div class="row">
   <div class="col s6 col-offset-3">
     <div class="card">
       <div class="card-content">
-        <span class="card-title">{{ toy.name }}</span>
-        <p>Color: {{ toy.color }}</p>
+        <span class="card-title">{{ actor.name }}</span>
+        <p>Color: {{ actor.color }}</p>
       </div>
       <div class="card-action">
-        <a href="{% url 'toys_update' toy.id %}">Edit</a>
-        <a href="{% url 'toys_delete' toy.id %}">Delete</a>
+        <a href="{% url 'actors_update' actor.id %}">Edit</a>
+        <a href="{% url 'actors_delete' actor.id %}">Delete</a>
       </div>
     </div>
   </div>

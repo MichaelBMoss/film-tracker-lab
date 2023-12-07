@@ -1,5 +1,5 @@
 """
-ASGI config for catcollector project.
+ASGI config for filmtracker project.
 
 It exposes the ASGI callable as a module-level variable named ``application``.
 
@@ -11,6 +11,6 @@ import os
 
 from django.core.asgi import get_asgi_application
 
-os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'catcollector.settings')
+os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'filmtracker.settings')
 
 application = get_asgi_application()
