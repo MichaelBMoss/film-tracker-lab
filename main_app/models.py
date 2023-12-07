@@ -9,10 +9,9 @@ MEALS = (
 )
 
 
-# Create your models here.
 class Actor(models.Model):
   name = models.CharField(max_length=50)
-  color = models.CharField(max_length=20)
+  gender = models.CharField(max_length=20)
 
   def __str__(self):
     return self.name
@@ -23,16 +22,11 @@ class Actor(models.Model):
 
 class Film(models.Model):
   name = models.CharField(max_length=100)
-  breed = models.CharField(max_length=100)
-  description = models.TextField(max_length=250)
-  age = models.IntegerField()
-  # Create a M:M relationship with Actor
-  # actors is the Related Manager
+  genre = models.CharField(max_length=100)
+  plot = models.TextField(max_length=250)
+  year = models.IntegerField()
   actors = models.ManyToManyField(Actor)
 
-  # Changing this instance method
-  # does not impact the database, therefore
-  # no makemigrations is necessary
   def __str__(self):
     return f'{self.name} ({self.id})'
 
@@ -50,7 +44,7 @@ class Director(models.Model):
     choices=MEALS,
     default=MEALS[0][0]
   )
-  # Create a film_id FK
+
   film = models.ForeignKey(
     Film,
     on_delete=models.CASCADE

@@ -8,12 +8,12 @@
     <div class="card">
       <div class="card-content">
         <span class="card-title">{{ film.name }}</span>
-        <p>Breed: {{ film.breed }}</p>
-        <p>Description: {{ film.description|linebreaks }}</p>
-        {% if film.age > 0 %}
-          <p>Age: {{ film.age }}</p>
+        <p>Genre: {{ film.genre }}</p>
+        <p>Plot: {{ film.plot|linebreaks }}</p>
+        {% if film.year > 0 %}
+          <p>Year: {{ film.year }}</p>
         {% else %}
-          <p>Age: Kitten</p>
+          <p>Year: Kitten</p>
         {% endif %}
       </div>
     </div>
